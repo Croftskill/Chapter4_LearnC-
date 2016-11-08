@@ -1,19 +1,22 @@
 #include <iostream>
 #include <string>
 #include <cstdlib>
-#include "./Monster/monster.h"
-#include "./Guess/guess.h"
-#include "./Items/items.h"
-
+#include "SortGrade/sort_grade.h"
 
 int main(int argc,char* argv[])
 {
-int total;
-player Hero;
-Hero.backpack[0]=12;
-total=countTotalItems(&Hero);
 
-std::cout<<"Total amount of items: "<<total<<std::endl;
+int students_amount;
+std::cout<<"Provide number of students: ";
+std::cin>>students_amount;
+
+student *List_of_students=new student[students_amount];
+
+fill_students(List_of_students, students_amount);
+sort_students(List_of_students, students_amount);
+display_students(List_of_students, students_amount);
+
+delete [] List_of_students;
 
 return 0;
 }
