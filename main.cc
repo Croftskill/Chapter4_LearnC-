@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <cstdlib>
 
 enum ID
 	{
@@ -43,12 +44,35 @@ std::cout<<"This Slime is named "<<xMonster.name<<" and has "<<xMonster.health<<
 }
 }
 
+int insertValue(int i){
+int guess;
+std::cout<<"Guess #"<<i<<": ";
+std::cin>>guess;
+return guess;
+}
+
 int main(int argc,char* argv[])
 {
-Monster Ogre_MrAxe{ID_OGRE, "Mr_Axe", 150};
-Monster Slime_MrBlach{ID_SLIME, "MrBlach", 200};
-printMonster(Ogre_MrAxe);
-printMonster(Slime_MrBlach);
+int i=1;
+int thrown, guess;
+srand(time(NULL));
+thrown=rand()%100+1;
+
+std::cout<<"Let's play a game. I'm thinking of a number. You have 7 tries to guess that it is."<<endl;
+
+while(i<8){
+guess=insertValue(i);
+if(guess>thrown)
+std::cout<<"Your guess is too high."<<endl;
+else if(guess<thrown)
+std::cout<<"Your guess is too low."<<endl;
+else{
+std:cout<<"Correct! You win!"<<endl;
+break;
+}
+i++;
+}
+
 
 return 0;
 }
