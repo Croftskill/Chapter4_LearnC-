@@ -2,6 +2,16 @@
 #include <utility>
 #include "sort_grade.h"
 
+void swap_meine(student &start, student &end){
+
+student var;
+
+var=start;
+start=end;
+end=var;
+
+}
+
 void fill_students(student *List_of_students,int student_am){
 
 for(int i=0;i<student_am;i++){
@@ -40,7 +50,8 @@ highest_grade_index=start_index;
 	
 	}
 
-std::swap(List_of_students[start_index],List_of_students[highest_grade_index]);
+//std::swap(List_of_students[start_index],List_of_students[highest_grade_index]);
+swap_meine(List_of_students[start_index],List_of_students[highest_grade_index]);
 }
 
 }
