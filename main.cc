@@ -51,27 +51,35 @@ std::cin>>guess;
 return guess;
 }
 
+enum Item{
+	ITEM_HEALTH_POTION,
+	ITEM_TORCHE,
+	ITEM_ARROW,
+	MAX_ITEMS
+};
+
+struct player{
+
+int backpack[3]={2, 5, 10};
+
+};
+
+int countTotalItems(player *hero){
+int total=0;
+for(int i=0;i<MAX_ITEMS;i++)
+total+=hero->backpack[i];
+
+return total;
+}
+
 int main(int argc,char* argv[])
 {
-int i=1;
-int thrown, guess;
-srand(time(NULL));
-thrown=rand()%100+1;
+int total;
+player Hero;
+Hero.backpack[0]=66;
+total=countTotalItems(&Hero);
 
-std::cout<<"Let's play a game. I'm thinking of a number. You have 7 tries to guess that it is."<<endl;
-
-while(i<8){
-guess=insertValue(i);
-if(guess>thrown)
-std::cout<<"Your guess is too high."<<endl;
-else if(guess<thrown)
-std::cout<<"Your guess is too low."<<endl;
-else{
-std:cout<<"Correct! You win!"<<endl;
-break;
-}
-i++;
-}
+std::cout<<"Total amount of items: "<<total<<endl;
 
 
 return 0;
