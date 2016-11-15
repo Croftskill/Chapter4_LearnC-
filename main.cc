@@ -3,64 +3,77 @@
 #include <cstdlib>
 #include <array>
 
-int binarySearch1(int *array, int target, int min, int max)
+class Stack{
+
+int array[10];
+int length;
+
+public:
+
+void reset();
+bool push(int);
+int pop();
+void print();
+
+};
+
+void Stack::reset()
 {
+for(int i;i<10;i++)
+array[i] = 0;
+length = -1;
+}
 
-int i=0;
-
-while(min<=max)
+bool Stack::push(int val)
 {
-
-i=(max+min)/2;
-
-if(array[i]==target)
-return i;
-
-if(array[i]<target)
-min=i+1;
+if(length<10)
+{
+	length++;
+	array[length] = val;
+	return true;
+}
 else
-max=i-1;
-
+return false;
 }
 
+int Stack::pop()
+{
+if(length>=0)
+{
+	length--;
+	return array[length + 1];
+}
+else
 return -1;
-
 }
 
-
-int binarySearch1(int *array, int target, int min, int max)
+void Stack::print()
 {
-
-if(min<=max)
-if(array[(man+min)/2]<max)
-
-
-
-}
- 
-int main()
-{
-    int array[] = { 3, 6, 8, 12, 14, 17, 20, 21, 26, 32, 36, 37, 42, 44, 48 };
- 
-    // We're going to test a bunch of values to see if they produce the expected results
-    const int numTestValues = 9;
-    // Here are the test values
-    int testValues[numTestValues] = { 0, 3, 12, 13, 22, 26, 43, 44, 49 };
-    // And here are the expected results for each value
-    int expectedValues[numTestValues] = { -1, 0, 3, -1, -1, 8, -1, 13, -1 };
- 
-    // Loop through all of the test values
-    for (int count=0; count < numTestValues; ++count)
-    {
-        // See if our test value is in the array
-        int index = binarySearch(array, testValues[count], 0, 14);
-        // If it matches our expected value, then great!
-        if (index == expectedValues[count])
-             std::cout << "test value " << testValues[count] << " passed!\n";
-        else // otherwise, our binarySearch() function must be broken
-             std::cout << "test value " << testValues[count] << " failed.  There's something wrong with your code!\n";
-    }
- 
-    return 0;
+std::cout<<"( ";
+for(int i=0;i<length + 1;i++)
+std::cout<<array[i]<<" ";
+std::cout<<")\n";
 }
 
+int main(){
+
+	Stack stack;
+	stack.reset();
+ 
+	stack.print();
+ 
+	stack.push(5);
+	stack.push(3);
+	stack.push(8);
+	stack.print();
+ 
+	stack.pop();
+	stack.print();
+ 
+	stack.pop();
+	stack.pop();
+ 
+	stack.print();
+
+return 0;
+}
