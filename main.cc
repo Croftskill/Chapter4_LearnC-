@@ -4,257 +4,101 @@
 #include <array>
 #include <ctime>
 
-class Card
+class Fraction
 {
-public:
-
-	enum CardSuit
-	{
-	SUIT_CLUB,
-	SUIT_DIAMOND,
-	SUIT_HEART,
-	SUIT_SPADE,
-	MAX_SUITS
-	};
-
-	enum CardRank
-	{
-	RANK_2,
-	RANK_3,
-	RANK_4,
-	RANK_5,
-	RANK_6,
-	RANK_7,
-	RANK_8,
-	RANK_9,
-	RANK_10,
-	RANK_JACK,
-	RANK_QUEEN,
-	RANK_KING,
-	RANK_ACE,
-	MAX_RANKS
-	};
-
 private:
-
-	CardRank m_rank;
-	CardSuit m_suit;
+int m_numerator = 0;
+int m_denumerator = 1;
 
 public:
 
-	Card()
+	Fraction(int numerator = 0 ,int denumerator = 1):m_numerator(numerator),m_denumerator(denumerator)
 	{
-//	std::cout << "Default Constructor \n";
+	reduce();
 	}
 
-	Card(CardRank rank ,CardSuit suit):m_rank(rank),m_suit(suit)
+void	print()
 	{
-	//std::cout << "Parametric Constructor \n";
+	std::cout << m_numerator << "/" << m_denumerator << std::endl;
 	}
 
-void printCard() const
-{
-	switch (m_rank)
-	{
-		case RANK_2:		std::cout << '2'; break;
-		case RANK_3:		std::cout << '3'; break;
-		case RANK_4:		std::cout << '4'; break;
-		case RANK_5:		std::cout << '5'; break;
-		case RANK_6:		std::cout << '6'; break;
-		case RANK_7:		std::cout << '7'; break;
-		case RANK_8:		std::cout << '8'; break;
-		case RANK_9:		std::cout << '9'; break;
-		case RANK_10:		std::cout << 'T'; break;
-		case RANK_JACK:		std::cout << 'J'; break;
-		case RANK_QUEEN:	std::cout << 'Q'; break;
-		case RANK_KING:		std::cout << 'K'; break;
-		case RANK_ACE:		std::cout << 'A'; break;
-	}
- 
-	switch (m_suit)
-	{
-		case SUIT_CLUB:		std::cout << 'C'; break;
-		case SUIT_DIAMOND:	std::cout << 'D'; break;
-		case SUIT_HEART:	std::cout << 'H'; break;
-		case SUIT_SPADE:	std::cout << 'S'; break;
-	}
+	friend Fraction operator*(const Fraction&, const Fraction&);
+	friend Fraction operator*(const Fraction&, int);
+	friend Fraction operator*(int, const Fraction&);
+
+	friend std::ostream& operator<<(std::ostream&,const Fraction&);
+	friend std::istream& operator>>(std::istream&, Fraction&);
+
+static int gcd(int a, int b) {
+    return b == 0 ? a : gcd(b, a % b);
 }
 
-int getCardValue() const
-{
-	switch (m_rank)
+void	reduce()
 	{
-	case RANK_2:		return 2;
-	case RANK_3:		return 3;
-	case RANK_4:		return 4;
-	case RANK_5:		return 5;
-	case RANK_6:		return 6;
-	case RANK_7:		return 7;
-	case RANK_8:		return 8;
-	case RANK_9:		return 9;
-	case RANK_10:		return 10;
-	case RANK_JACK:		return 10;
-	case RANK_QUEEN:	return 10;
-	case RANK_KING:		return 10;
-	case RANK_ACE:		return 11;
+	int gcd_x=gcd(m_numerator,m_denumerator);
+	/*if(gcd_x!=0)
+		{
+		m_numerator/=gcd_x;
+		m_denumerator/=gcd_x;
+		}
+	}
+	*/
+	
+		int gcd = Fraction::gcd(m_numerator, m_denumerator);
+		m_numerator /= gcd;
+		m_denumerator /= gcd;
 	}
 	
-	return 0;
-}
-
-~Card()
-{
-//std::cout << "Destructor attack\n";
-}
 
 };
 
-class Deck
-{
-
-std::array<Card, 52> m_deck;
-
-static int getRandomNumber(int min, int max)
-{
-	static const double fraction = 1.0 / (static_cast<double>(RAND_MAX) + 1.0);  // static used for efficiency, so we only calculate this value once
- 	// evenly distribute the random number across our range
-	return static_cast<int>(rand() * fraction * (max - min + 1) + min);
-}
-
-	static void swapCard(Card &a, Card &b)
+	Fraction operator*(const Fraction &f1, const Fraction &f2)
+	{	
+	return Fraction(f1.m_numerator*f2.m_numerator,f1.m_denumerator*f2.m_denumerator);
+	}
+	
+	Fraction operator*(const Fraction& f1, int num)
 	{
-		Card temp = a;
-		a = b;
-		b = temp;
+	return Fraction(f1.m_numerator*num,f1.m_denumerator);
+	}
+	
+	Fraction operator*(int num, const Fraction& f1)
+	{
+	return f1*num;
 	}
 
-public:
-
-
-Deck()
-{
-int card = 0;
-for(int i=0 ; i< Card::MAX_SUITS; ++i)
-	for(int j = 0; j < Card::MAX_RANKS; ++j)
+	std::ostream& operator<<(std::ostream &out, const Fraction &f)
 	{
-	m_deck[card]=Card(static_cast<Card::CardRank>(j), static_cast<Card::CardSuit>(i));
-	++card;
+	out << f.m_numerator <<"/"<< f.m_denumerator;
+	return out;
 	}
 
-}
-
-
-
-void printDeck()
-{
-/*	for (const auto &card : m_deck)
+	std::istream& operator>>(std::istream& in, Fraction& f)
 	{
-		card.printCard();
-		std::cout << " ";
+	in >> f.m_numerator;
+	in >> f.m_denumerator;
+
+	return in; 
 	}
-*/
-
-	for(int i = 0; i < 52; ++i)
-	{
-	m_deck[i].printCard();
-	std::cout << " ";
-	} 
-
-	std::cout << "\n";
-}
-
-
-
-void	shuffleDeck()
-{ 
-	for(int index = 0; index <52; ++index)
-	{
-	int swapIndex = getRandomNumber(0, 51);
-	swapCard(m_deck[index],m_deck[swapIndex]);
-	}
-
-}
-
-Card& 	dealCard()
-{
-static int cardNumber = 0;
-
-return m_deck[cardNumber++];
-}
-
-};
-
-char getPlayerChoice();
-bool playBlackjack(Deck&);
 
 int main()
 {
-    srand(static_cast<unsigned int>(time(0))); // set initial seed value to system clock
-    rand(); // If using Visual Studio, discard first random value
 
-      Deck deck;
-      deck.shuffleDeck();
-      deck.printDeck();
-
-	if (playBlackjack(deck))
-		std::cout << "You win!\n";
-	else
-		std::cout << "You lose!\n";
-
-return 0;
-}
-
-
-bool playBlackjack(Deck& deck)
-{
-	int playerTotal = 0;
-	int dealerTotal = 0;
  
-	// Deal the player one card
-	dealerTotal += deck.dealCard().getCardValue();
-	std::cout << "The dealer is showing: " << dealerTotal << '\n';
+	Fraction f1;
+	std::cout << "Enter fraction 1: \n";
+	std::cin >> f1;
+	f1.print();
  
-	// Deal the player two cards
-	playerTotal += deck.dealCard().getCardValue();
-	playerTotal += deck.dealCard().getCardValue();
- 
-	// Player goes first
-	while (1)
-	{
-		std::cout << "You have: " << playerTotal << '\n';
-		char choice = getPlayerChoice();
-		if (choice == 's')
-			break;
- 
-	playerTotal += deck.dealCard().getCardValue();
-		
-		// See if the player busted
-		if (playerTotal > 21)
-			return false;
-	}
- 
-	// If player hasn't busted, dealer goes until he has at least 17 points
-	while (dealerTotal < 17)
-	{
-	dealerTotal += deck.dealCard().getCardValue();
-		std::cout << "The dealer now has: " << dealerTotal << '\n';
-	}
- 
-	// If dealer busted, player wins
-	if (dealerTotal > 21)
-		return true;
- 
-	return (playerTotal > dealerTotal);
-}
-
-char getPlayerChoice()
-{
-	std::cout << "(h) to hit, or (s) to stand: ";
-	char choice;
-	do
-	{
-		std::cin >> choice;
-	} while (choice != 'h' && choice != 's');
+	Fraction f2;
+	std::cout << "Enter fraction 2: \n";
+	std::cin >> f2;
+	f2.print();
 	
-	return choice;
+	Fraction f3=f1*f2; 
+
+	std::cout << f1 << " * " << f2 << " is "<< f1 * f2 << '\n';
+//	std::cout << (f1*f2); 
+	return 0; 
 }
+
