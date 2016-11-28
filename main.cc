@@ -5,42 +5,59 @@
 #include <vector>
 #include <string>
 
-class Mystring
+class Average
 {
 private:
-std::string m_string;
+int32_t m_sum;
+int8_t amount;
 
 public:
-Mystring(std::string string):m_string(string)
+Average():m_sum(0), amount(0)
 {}
 
-std::string operator()(int index, int char_num)
+Average& operator+=(int num)
 {
-if(m_string.size() < index)
-return "String is smaller than you asked!!";
+m_sum+=static_cast<int32_t>(num);
+amount++;
 
-if(m_string.size() < char_num + index)
-return "Man index is ok but you asked for too many characters - overflow";
+return *this;
+}
 
-std::string my_string; // = &(m_string.at(index - 1));
-int i, j;
+friend std::ostream& operator<<(std::ostream& out, const Average& average)
+{
 
-for( j = 0; j < char_num; j++)
-my_string += m_string[index+j-1];
+std::cout<<static_cast<double>(average.m_sum)/static_cast<double>(average.amount);
 
-//my_string.at(index+char_num) = '\0';
 
-return my_string;
-} 
 
+
+return out;
+}
 
 };
 
 int main()
 {
 
-Mystring string("Hello world!");
-std::cout << "This is my string!!: " << string(7,5) << '\n';
+Average avg;
+
+avg += 4;
+std::cout << avg << '\n';
+
+avg += 8;
+std::cout << avg << '\n';
+
+avg += 24;
+std::cout << avg << '\n';
+
+avg +=-10;
+std::cout << avg << '\n';
+
+(avg += 6) += 10;
+std::cout << avg << '\n';
+
+Average copy = avg;
+std::cout << copy << '\n';
 
 return 0;
 }
