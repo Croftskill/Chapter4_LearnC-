@@ -5,36 +5,33 @@
 #include <vector>
 #include <string>
 
-struct StudentGrade
-{
-std::string student_name;
-char grade;
-};
-
-class GradeMap
+class Mystring
 {
 private:
-std::vector<StudentGrade> m_map;
+std::string m_string;
 
 public:
-GradeMap(){}
+Mystring(std::string string):m_string(string)
+{}
 
-char& operator[]( const std::string &name)
+std::string operator()(int index, int char_num)
 {
-int index = 0;
-index = m_map.size();
+if(m_string.size() < index)
+return "String is smaller than you asked!!";
 
-for(index = 0; index < m_map.size(); index++) 
-if(m_map.at(index).student_name==name)
-return m_map.at(index).grade;
+if(m_string.size() < char_num + index)
+return "Man index is ok but you asked for too many characters - overflow";
 
+std::string my_string; // = &(m_string.at(index - 1));
+int i, j;
 
-StudentGrade x {name, ' '};
-m_map.push_back(x);
+for( j = 0; j < char_num; j++)
+my_string += m_string[index+j-1];
 
-return m_map.back().grade;
-}
+//my_string.at(index+char_num) = '\0';
 
+return my_string;
+} 
 
 
 };
@@ -42,12 +39,8 @@ return m_map.back().grade;
 int main()
 {
 
-
-	GradeMap grades;
-	grades["Joe"] = 'A';
-	grades["Frank"] = 'B';
-	std::cout << "Joe has a grade of " << grades["Joe"] << '\n';
-	std::cout << "Frank has a grade of " << grades["Frank"] << '\n';
+Mystring string("Hello world!");
+std::cout << "This is my string!!: " << string(7,5) << '\n';
 
 return 0;
 }
