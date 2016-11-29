@@ -6,88 +6,95 @@
 #include <string>
 #include <cassert>
 
-class IntArray
+template <typename T, int mysize>
+class MyArray
 {
 private:
-int *m_array = nullptr;
-int m_size = 0;
+T m_array[mysize];
+int m_size;
+
 public:
 
-IntArray(int num):m_size(num)
+MyArray():m_size(mysize)
 {
-assert(m_size > 0 && "IntArray length should be a positive integer");
+for(int i = 0; i < m_size; i++)
+m_array[i] = 0;
 
-m_array = new int[num];
 }
 
-IntArray(const IntArray& array):m_size(array.m_size)
+void printKOKO()
 {
-m_array = new int[array.m_size];
-
-} 
-
-IntArray& operator=(const IntArray& intarray)
-{
-if(this==&intarray)
-return *this;
-
-delete[] m_array;
-m_size = intarray.m_size;
-m_array = new int[m_size];
-
-for(int i = 0; i < m_size ; i++)
-m_array[i] = intarray.m_array[i];
-
-return *this;
+std::cout << "KOKO";
 }
 
-friend std::ostream& operator<<(std::ostream& out,const IntArray& myarray)
+T& operator[](const int index)
 {
+assert(index < m_size && "That entry not exist in this obiect");
+assert(index >= 0 && "Index must be higher that 0!");
 
-for(int i = 0; i < myarray.m_size; i++)
-std::cout << myarray.m_array[i] <<" ";
-
-return out;
+return m_array[index];
 }
 
-int& operator[](const int a)
-{
-assert(a >= 0);
-assert(a < m_size);
+};
 
-return m_array[a];
+template <>
+void MyArray<char,10>::printKOKO()
+{
+std::cout << "KOKOSZAAA\n";
 }
 
-~IntArray()
+
+template <typename T, int mysize>
+class MyArray<T*, mysize>
+{
+private:
+T** m_array;
+int m_size;
+
+public:
+MyArray():m_size(mysize)
+{
+m_array = new T*[m_size];
+
+}
+
+T** operator[](const int index)
+{
+assert(index < m_size && "That entry not exist in this obiect");
+assert(index >=0 && "Index must be higher that 0!");
+
+return (m_array+index);
+}
+
+
+~MyArray()
 {
 delete[] m_array;
 }
 
 };
 
-IntArray fillArray()
-{
-	IntArray a(5);
-	a[0] = 5;
-	a[1] = 8;
-	a[2] = 2;
-	a[3] = 3;
-	a[4] = 6;
-
-	return a;
-}
-
 int main()
 {
 
-IntArray a = fillArray();
-std::cout << a << '\n';
+MyArray<int*, 10> my_pointers;
+MyArray<char, 10> my_array;
 
-IntArray b(1);
-a = a;
-b = a;
+for(int i = 0; i < 10; i++)
+{
+my_array[i] = i;
+//my_pointers[i] = &(my_array[i]);
 
-std::cout << b << '\n';
+}
+
+//my_pointers[1] = NULL; 
+
+my_array[1] = 66;
+
+my_array.printKOKO();
+//std::cout << my_array.printKOKO() << '\n';
+
+
 
 return 0;
 }
