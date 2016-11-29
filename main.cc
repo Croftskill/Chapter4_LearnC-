@@ -4,60 +4,90 @@
 #include <ctime>
 #include <vector>
 #include <string>
+#include <cassert>
 
-class Average
+class IntArray
 {
 private:
-int32_t m_sum;
-int8_t amount;
-
+int *m_array = nullptr;
+int m_size = 0;
 public:
-Average():m_sum(0), amount(0)
-{}
 
-Average& operator+=(int num)
+IntArray(int num):m_size(num)
 {
-m_sum+=static_cast<int32_t>(num);
-amount++;
+assert(m_size > 0 && "IntArray length should be a positive integer");
+
+m_array = new int[num];
+}
+
+IntArray(const IntArray& array):m_size(array.m_size)
+{
+m_array = new int[array.m_size];
+
+} 
+
+IntArray& operator=(const IntArray& intarray)
+{
+if(this==&intarray)
+return *this;
+
+delete[] m_array;
+m_size = intarray.m_size;
+m_array = new int[m_size];
+
+for(int i = 0; i < m_size ; i++)
+m_array[i] = intarray.m_array[i];
 
 return *this;
 }
 
-friend std::ostream& operator<<(std::ostream& out, const Average& average)
+friend std::ostream& operator<<(std::ostream& out,const IntArray& myarray)
 {
 
-std::cout<<static_cast<double>(average.m_sum)/static_cast<double>(average.amount);
-
-
-
+for(int i = 0; i < myarray.m_size; i++)
+std::cout << myarray.m_array[i] <<" ";
 
 return out;
 }
 
+int& operator[](const int a)
+{
+assert(a >= 0);
+assert(a < m_size);
+
+return m_array[a];
+}
+
+~IntArray()
+{
+delete[] m_array;
+}
+
 };
+
+IntArray fillArray()
+{
+	IntArray a(5);
+	a[0] = 5;
+	a[1] = 8;
+	a[2] = 2;
+	a[3] = 3;
+	a[4] = 6;
+
+	return a;
+}
 
 int main()
 {
 
-Average avg;
+IntArray a = fillArray();
+std::cout << a << '\n';
 
-avg += 4;
-std::cout << avg << '\n';
+IntArray b(1);
+a = a;
+b = a;
 
-avg += 8;
-std::cout << avg << '\n';
-
-avg += 24;
-std::cout << avg << '\n';
-
-avg +=-10;
-std::cout << avg << '\n';
-
-(avg += 6) += 10;
-std::cout << avg << '\n';
-
-Average copy = avg;
-std::cout << copy << '\n';
+std::cout << b << '\n';
 
 return 0;
 }
