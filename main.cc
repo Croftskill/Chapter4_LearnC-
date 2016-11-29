@@ -5,95 +5,65 @@
 #include <vector>
 #include <string>
 #include <cassert>
-
-template <typename T, int mysize>
-class MyArray
-{
-private:
-T m_array[mysize];
-int m_size;
-
-public:
-
-MyArray():m_size(mysize)
-{
-for(int i = 0; i < m_size; i++)
-m_array[i] = 0;
-
-}
-
-void printKOKO()
-{
-std::cout << "KOKO";
-}
-
-T& operator[](const int index)
-{
-assert(index < m_size && "That entry not exist in this obiect");
-assert(index >= 0 && "Index must be higher that 0!");
-
-return m_array[index];
-}
-
-};
-
-template <>
-void MyArray<char,10>::printKOKO()
-{
-std::cout << "KOKOSZAAA\n";
-}
-
-
-template <typename T, int mysize>
-class MyArray<T*, mysize>
-{
-private:
-T** m_array;
-int m_size;
-
-public:
-MyArray():m_size(mysize)
-{
-m_array = new T*[m_size];
-
-}
-
-T** operator[](const int index)
-{
-assert(index < m_size && "That entry not exist in this obiect");
-assert(index >=0 && "Index must be higher that 0!");
-
-return (m_array+index);
-}
-
-
-~MyArray()
-{
-delete[] m_array;
-}
-
-};
+#include <deque>
+#include <map>
+#include <algorithm>
+#include <list>
 
 int main()
 {
+std::array<int, 5> my_array;
 
-MyArray<int*, 10> my_pointers;
-MyArray<char, 10> my_array;
+std::vector<int> my_vector;
 
-for(int i = 0; i < 10; i++)
+std::deque<int> my_deque;
+
+std::map<int, std::string> my_map;
+
+std::list<int> my_list;
+
+for(int i = 0; i < 5; ++i)
 {
-my_array[i] = i;
-//my_pointers[i] = &(my_array[i]);
-
+my_list.push_back(i);
+my_vector.push_back(i);
 }
 
-//my_pointers[1] = NULL; 
+std::list<int>::const_iterator it;
 
-my_array[1] = 66;
+it = min_element(my_list.begin(),my_list.end());
+std::cout << "Smallest element in list: "<< *it <<'\n';
+it = max_element(my_list.begin(), my_list.end());
+std::cout << "Biggest element in list: " << *it << '\n';
 
-my_array.printKOKO();
-//std::cout << my_array.printKOKO() << '\n';
+it = find(my_list.begin(), my_list.end(), 3);
+my_list.insert(it, 66);
 
+for(it = my_list.begin(); it != my_list.end(); it++)
+std::cout << *it << " ";
+std::cout << std::endl;
+reverse(my_vector.begin(), my_vector.end());
+
+for(int i = 0; i < my_vector.size(); i++)
+std::cout << my_vector[i] << " ";
+std::cout << std::endl;
+/*
+my_map.insert(std::make_pair(1, "apple"));
+my_map.insert(std::make_pair(5, "kokosza"));
+my_map.insert(std::make_pair(2, "banan"));
+
+std::map<int, std::string>::const_iterator it;
+
+it = my_map.begin();
+
+
+while(it != my_map.end())
+{
+std::cout << it->first << "=" << it-> second <<" ";
+it++;
+}
+
+std::cout << std::endl;
+*/
 
 
 return 0;
