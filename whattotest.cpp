@@ -1,19 +1,10 @@
-#include <iostream>
-#include <cstdlib>
-#include <array>
-#include <ctime>
-#include <vector>
-#include <string>
-#include <cassert>
-#include <deque>
-#include <map>
-#include <algorithm>
-#include <list>
+#include <math.h>
+
 
 template <typename T>
 int solution(T A[], T N);
 
-template <>			// To prevent implicit convertions from other types.
+template <>                     // To prevent implicit convertions from other types.
 int solution(int A[], int N)
 {
 
@@ -40,21 +31,3 @@ sum_high = 0;
 return -1;
 }
 
-
-
-int dontGiveMeFive(int start, int end)
-{
-    if(start > end || (start == end && start == 5))
-  return 0;
-
- return abs(((end-start+1)  - ( (    ((end/5) + (((end)/5)%2)   )/2   ) - ((start/5) + (((start)/5)%2)   )/2  ) ));
-  
-}
-
-int main()
-{
-
-
-
-return 0;
-}
