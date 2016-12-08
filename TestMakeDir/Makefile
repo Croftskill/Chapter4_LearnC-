@@ -48,10 +48,10 @@ RM = /usr/local/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/collimator/Work/Linux_C/Linux_Makefile/C++/LearnC++_course/Learn_git
+CMAKE_SOURCE_DIR = /home/collimator/Work/Linux_C/Linux_Makefile/C++/LearnC++_course/Learn_git/TestMakeDir
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/collimator/Work/Linux_C/Linux_Makefile/C++/LearnC++_course/Learn_git
+CMAKE_BINARY_DIR = /home/collimator/Work/Linux_C/Linux_Makefile/C++/LearnC++_course/Learn_git/TestMakeDir
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -80,9 +80,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/collimator/Work/Linux_C/Linux_Makefile/C++/LearnC++_course/Learn_git/CMakeFiles /home/collimator/Work/Linux_C/Linux_Makefile/C++/LearnC++_course/Learn_git/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/collimator/Work/Linux_C/Linux_Makefile/C++/LearnC++_course/Learn_git/TestMakeDir/CMakeFiles /home/collimator/Work/Linux_C/Linux_Makefile/C++/LearnC++_course/Learn_git/TestMakeDir/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/collimator/Work/Linux_C/Linux_Makefile/C++/LearnC++_course/Learn_git/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/collimator/Work/Linux_C/Linux_Makefile/C++/LearnC++_course/Learn_git/TestMakeDir/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -123,32 +123,32 @@ runTests/fast:
 	$(MAKE) -f CMakeFiles/runTests.dir/build.make CMakeFiles/runTests.dir/build
 .PHONY : runTests/fast
 
-tests.o: tests.cpp.o
+home/collimator/Work/Linux_C/Linux_Makefile/C++/LearnC++_course/Learn_git/tests.o: home/collimator/Work/Linux_C/Linux_Makefile/C++/LearnC++_course/Learn_git/tests.cpp.o
 
-.PHONY : tests.o
+.PHONY : home/collimator/Work/Linux_C/Linux_Makefile/C++/LearnC++_course/Learn_git/tests.o
 
 # target to build an object file
-tests.cpp.o:
-	$(MAKE) -f CMakeFiles/runTests.dir/build.make CMakeFiles/runTests.dir/tests.cpp.o
-.PHONY : tests.cpp.o
+home/collimator/Work/Linux_C/Linux_Makefile/C++/LearnC++_course/Learn_git/tests.cpp.o:
+	$(MAKE) -f CMakeFiles/runTests.dir/build.make CMakeFiles/runTests.dir/home/collimator/Work/Linux_C/Linux_Makefile/C++/LearnC++_course/Learn_git/tests.cpp.o
+.PHONY : home/collimator/Work/Linux_C/Linux_Makefile/C++/LearnC++_course/Learn_git/tests.cpp.o
 
-tests.i: tests.cpp.i
+home/collimator/Work/Linux_C/Linux_Makefile/C++/LearnC++_course/Learn_git/tests.i: home/collimator/Work/Linux_C/Linux_Makefile/C++/LearnC++_course/Learn_git/tests.cpp.i
 
-.PHONY : tests.i
+.PHONY : home/collimator/Work/Linux_C/Linux_Makefile/C++/LearnC++_course/Learn_git/tests.i
 
 # target to preprocess a source file
-tests.cpp.i:
-	$(MAKE) -f CMakeFiles/runTests.dir/build.make CMakeFiles/runTests.dir/tests.cpp.i
-.PHONY : tests.cpp.i
+home/collimator/Work/Linux_C/Linux_Makefile/C++/LearnC++_course/Learn_git/tests.cpp.i:
+	$(MAKE) -f CMakeFiles/runTests.dir/build.make CMakeFiles/runTests.dir/home/collimator/Work/Linux_C/Linux_Makefile/C++/LearnC++_course/Learn_git/tests.cpp.i
+.PHONY : home/collimator/Work/Linux_C/Linux_Makefile/C++/LearnC++_course/Learn_git/tests.cpp.i
 
-tests.s: tests.cpp.s
+home/collimator/Work/Linux_C/Linux_Makefile/C++/LearnC++_course/Learn_git/tests.s: home/collimator/Work/Linux_C/Linux_Makefile/C++/LearnC++_course/Learn_git/tests.cpp.s
 
-.PHONY : tests.s
+.PHONY : home/collimator/Work/Linux_C/Linux_Makefile/C++/LearnC++_course/Learn_git/tests.s
 
 # target to generate assembly for a file
-tests.cpp.s:
-	$(MAKE) -f CMakeFiles/runTests.dir/build.make CMakeFiles/runTests.dir/tests.cpp.s
-.PHONY : tests.cpp.s
+home/collimator/Work/Linux_C/Linux_Makefile/C++/LearnC++_course/Learn_git/tests.cpp.s:
+	$(MAKE) -f CMakeFiles/runTests.dir/build.make CMakeFiles/runTests.dir/home/collimator/Work/Linux_C/Linux_Makefile/C++/LearnC++_course/Learn_git/tests.cpp.s
+.PHONY : home/collimator/Work/Linux_C/Linux_Makefile/C++/LearnC++_course/Learn_git/tests.cpp.s
 
 # Help Target
 help:
@@ -159,9 +159,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... runTests"
-	@echo "... tests.o"
-	@echo "... tests.i"
-	@echo "... tests.s"
+	@echo "... home/collimator/Work/Linux_C/Linux_Makefile/C++/LearnC++_course/Learn_git/tests.o"
+	@echo "... home/collimator/Work/Linux_C/Linux_Makefile/C++/LearnC++_course/Learn_git/tests.i"
+	@echo "... home/collimator/Work/Linux_C/Linux_Makefile/C++/LearnC++_course/Learn_git/tests.s"
 .PHONY : help
 
 

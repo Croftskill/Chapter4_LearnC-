@@ -7,12 +7,8 @@
 #IncludeRegexTransform: 
 
 /home/collimator/Work/Linux_C/Linux_Makefile/C++/LearnC++_course/Learn_git/tests.cpp
-whattotest.cpp
-/home/collimator/Work/Linux_C/Linux_Makefile/C++/LearnC++_course/Learn_git/whattotest.cpp
+whattotest
+/home/collimator/Work/Linux_C/Linux_Makefile/C++/LearnC++_course/Learn_git/whattotest
 gtest/gtest.h
--
-
-/home/collimator/Work/Linux_C/Linux_Makefile/C++/LearnC++_course/Learn_git/whattotest.cpp
-math.h
 -
 

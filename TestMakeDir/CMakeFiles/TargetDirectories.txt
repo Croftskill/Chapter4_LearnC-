@@ -1,0 +1,3 @@
+/home/collimator/Work/Linux_C/Linux_Makefile/C++/LearnC++_course/Learn_git/TestMakeDir/CMakeFiles/edit_cache.dir
+/home/collimator/Work/Linux_C/Linux_Makefile/C++/LearnC++_course/Learn_git/TestMakeDir/CMakeFiles/rebuild_cache.dir
+/home/collimator/Work/Linux_C/Linux_Makefile/C++/LearnC++_course/Learn_git/TestMakeDir/CMakeFiles/runTests.dir

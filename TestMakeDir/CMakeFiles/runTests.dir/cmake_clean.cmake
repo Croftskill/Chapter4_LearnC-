@@ -1,5 +1,5 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/runTests.dir/tests.cpp.o"
+  "CMakeFiles/runTests.dir/home/collimator/Work/Linux_C/Linux_Makefile/C++/LearnC++_course/Learn_git/tests.cpp.o"
   "runTests.pdb"
   "runTests"
 )
