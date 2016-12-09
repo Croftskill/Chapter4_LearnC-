@@ -7,68 +7,37 @@
 #include <cassert>
 #include <algorithm>
 #include <iterator>
+#include <ctype.h>
 
+class TwoToOne{
 
-bool compare(std::string s1, std::string s2)
-{
-  int sum1 = 0, sum2 = 0, val;
-  bool result;
-  std::string::const_iterator it1 = s1.begin();
-  std::string::const_iterator it2 = s2.begin();
-  std::cout << "sum1: " << sum1 << "  sum2: " << sum2 << '\n'; 
-  int  len1 = static_cast<int>(s1.length()); 
-  int  len2 = static_cast<int>(s2.length()); 
-  std::cout << "sum1 length: " << len1 << "  sum2 length: " << len2 << '\n'; 
+public:
+  static std::string longest(const std::string &s1, const std::string &s2);
 
-if(s1.length() > 0)
-  while(it1 != s1.end() )
-  {
-    val = static_cast<int>(*it1);
-    if(val > 122 || val < 65 || ( val > 90  && val < 97  )  ) {
-      sum2 = 0;
-      break;
-    }
-    else {
-      if( val > 90)
-      sum1 += val - 32;
-      else
-      sum1 += val;
-    }
-    ++it1;
-  }
- 
-if(s2.length() > 0)
-  while(it2 != s2.end() )
-  {
-    val = static_cast<int>(*it2);
-    if(val > 122 || val < 65 || ( val > 90  && val < 97  )  ) {
-      sum2 = 0;
-      break;
-    }
-    else {
-      if( val > 90)
-      sum2 += val - 32;
-      else
-      sum2 += val;
-    }
-    ++it2;
-  }
+};
+
+std::string TwoToOne::longest(const std::string &s1, const std::string &s2){
+  std::string strx;
   
-  std::cout << "sum1: " << sum1 << "  sum2: " << sum2 << '\n'; 
-  if(sum1 == sum2)
-    return true;
-  else
-    return false;
+  std::sort( str1.begin(), str1.end() );
+  std::sort( str2.begin(), str2.end() );
+
+  for( int i = 97; i < 123; ++i){
+
+    if(s1.find(i) !=  std::string::npos){
+      strx.append(1,i);
+      continue;
+    }
+
+    if(s2.find(i) !=  std::string::npos)
+      strx.append(1,i);
+  }
+
 }
 
-int main(int argc, char* argv[]){
+int main(){
 
-
-std::cout << compare("", "zz1") << '\n';
-
+  std::cout << TwoToOne::longest("abcdefghilnoprstu", "koko") << '\n';
 
   return 0;
-
-
 }
-
