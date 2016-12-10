@@ -9,35 +9,39 @@
 #include <iterator>
 #include <ctype.h>
 
-class TwoToOne{
+std::string heavyMetalUmlauts(std::string boringText){
 
-public:
-  static std::string longest(const std::string &s1, const std::string &s2);
+  std::string::iterator it = boringText.begin();
+  std::string MyText;
 
-};
-
-std::string TwoToOne::longest(const std::string &s1, const std::string &s2){
-  std::string strx;
-  
-  std::sort( str1.begin(), str1.end() );
-  std::sort( str2.begin(), str2.end() );
-
-  for( int i = 97; i < 123; ++i){
-
-    if(s1.find(i) !=  std::string::npos){
-      strx.append(1,i);
-      continue;
+  for(; it!=boringText.end(); ++it){
+    switch(*it){
+      case 'A': MyText.append( "\u00c4" ); break; 
+      case 'a': MyText.append( "\u00e4" ); break; 
+      case 'O': MyText.append( "\u00d6" ); break; 
+      case 'o': MyText.append( "\u00f6" ); break; 
+      case 'E': MyText.append( "\u00cb" ); break; 
+      case 'e': MyText.append( "\u00eb" ); break; 
+      case 'U': MyText.append( "\u00dc" ); break; 
+      case 'u': MyText.append( "\u00fc" ); break; 
+      case 'I': MyText.append( "\u00cf" ); break; 
+      case 'i': MyText.append( "\u00ef" ); break; 
+      case 'Y': MyText.append( "\u0178" ); break; 
+      case 'y': MyText.append( "\u00ff" ); break; 
+      default: MyText.append(1, *it);  break;
     }
-
-    if(s2.find(i) !=  std::string::npos)
-      strx.append(1,i);
   }
 
+  return MyText;
 }
 
-int main(){
 
-  std::cout << TwoToOne::longest("abcdefghilnoprstu", "koko") << '\n';
+
+int main()
+{
+
+  std::cout << heavyMetalUmlauts("Announcing the Macbook Air Guitar") << '\n';
 
   return 0;
 }
+
